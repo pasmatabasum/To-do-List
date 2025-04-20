@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f0f4f8;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      background: #fff;
+      margin: 10px auto;
+      padding: 15px;
+      width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: left;
+      position: relative;
+      font-size: 18px;
+    }
+
+    .task-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .delete-btn {
+      background-color: #ff4d4d;
+      color: white;
+      margin-right: 5px;
+    }
+
+    .complete-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+  <input type="text" placeholder="Add a new task" id="inputtask" />
+  <button onclick="addtask()">Add Task</button>
+
+  <ul id="UL"></ul>
+
+  <script>
+    function addtask() {
+      var inputElement = document.getElementById("inputtask");
+      var input = inputElement.value.trim();
+      var Uitem = document.getElementById("UL");
+
+      if (input === "") {
+        alert("Please enter the task");
+        return;
+      }
+
+      const litem = document.createElement("li");
+      litem.innerText = input;
+      Uitem.appendChild(litem);
+
+      var buttonContainer = document.createElement("div");
+      buttonContainer.className = "task-button";
+      litem.appendChild(buttonContainer);
+
+      var deleteButton = document.createElement("button");
+      deleteButton.innerText = "Delete";
+      deleteButton.className = "delete-btn";
+      deleteButton.onclick = function () {
+        Uitem.removeChild(litem);
+      };
+      buttonContainer.appendChild(deleteButton);
+
+      var completeButton = document.createElement("button");
+      completeButton.innerText = "Complete";
+      completeButton.className = "complete-btn";
+      completeButton.onclick = function () {
+        litem.classList.toggle("completed");
+      };
+      buttonContainer.appendChild(completeButton);
+
+      inputElement.value = "";
+    }
+  </script>
+</body>
+</html>
